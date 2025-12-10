@@ -1,0 +1,33 @@
+﻿using MediatR;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Queries.ProductAttributeQueries;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Results.ProductAttributeResults;
+using OnionVb02.Contract.RepositoryInterfaces;
+using OnionVb02.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.ProductAttributeQueryHandlers
+{
+    public class GetProductAttributeByIdQueryHandler : IRequestHandler<GetProductAttributeByIdQuery, GetProductAttributeByIdQueryResult>
+    {
+        private readonly IProductAttributeRepository _repository;
+
+        public GetProductAttributeByIdQueryHandler(IProductAttributeRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public async Task<GetProductAttributeByIdQueryResult> Handle(GetProductAttributeByIdQuery request, CancellationToken cancellationToken)
+        {
+            ProductAttribute value = await _repository.GetByIdAsync(request.Id);
+            return new GetProductAttributeByIdQueryResult
+            {
+                Id = value.Id,
+                Name = value.Name
+            };
+        }
+    }
+}

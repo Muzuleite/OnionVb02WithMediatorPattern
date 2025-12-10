@@ -2,14 +2,21 @@
 using OnionVb02.Application.CqrsAndMediatr.CQRS.Handlers.Modify.CategoryHandlers;
 using OnionVb02.Application.CqrsAndMediatr.CQRS.Handlers.Read.CategoryQueryHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.AppUserCommandHandlers;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.AppUserProfileCommandHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.OrderCommandHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.OrderDetailCommandHandlers;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.ProductAttributeCommandHandlers;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.ProductAttributeValueCommandHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Modify.ProductCommandHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.AppUserProfileQueryHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.AppUserQueryHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.OrderDetailQueryHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.OrderQueryHandlers;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.ProductAttributeQueryHandlers;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.ProductAttributeValueQueryHandlers;
 using OnionVb02.Application.CqrsAndMediatr.Mediator.Handlers.Read.ProductQueryHandlers;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Queries.ProductAttributeQueries;
+using OnionVb02.Application.CqrsAndMediatr.Mediator.Queries.ProductAttributeValueQueries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +45,9 @@ namespace OnionVb02.Application.DependencyResolvers
 
             services.AddScoped<GetAppUserProfileQueryHandler>();
             services.AddScoped<GetAppUserProfileByIdQueryHandler>();
-            services.AddScoped<CreateAppUserProfileCommand>();
-            services.AddScoped<UpdateAppUserProfileCommand>();
-            services.AddScoped<RemoveAppUserProfileCommand>();
+            services.AddScoped<CreateAppUserProfileCommandHandler>();
+            services.AddScoped<UpdateAppUserProfileCommandHandler>();
+            services.AddScoped<RemoveAppUserProfileCommandHandler>();
 
 
 
@@ -65,6 +72,17 @@ namespace OnionVb02.Application.DependencyResolvers
             services.AddScoped<RemoveOrderDetailCommandHandler>();
 
 
+            services.AddScoped<GetProductAttributeByIdQueryHandler>();
+            services.AddScoped<GetProductAttributeQueryHandler>();
+            services.AddScoped<CreateProductAttributeCommandHandler>();
+            services.AddScoped<RemoveProductAttributeCommandHandler>();
+            services.AddScoped<UpdateProductAttributeCommandHandler>();
+
+            services.AddScoped<GetProductAttributeValueByIdQueryHandler>();
+            services.AddScoped<GetProductAttributeValueQueryHandler>();
+            services.AddScoped<CreateProductAttributeValueCommandHandler>();
+            services.AddScoped<RemoveProductAttributeValueCommandHandler>();
+            services.AddScoped<UpdateProductAttributeValueCommandHandler>();
 
 
             services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(GetCategoryByIdQueryHandler).Assembly));
